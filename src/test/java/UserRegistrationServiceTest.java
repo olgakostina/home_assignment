@@ -11,16 +11,9 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.*;
 
 public class UserRegistrationServiceTest {
-    GregorianCalendar calendar = new GregorianCalendar(1992,
+    Calendar calendar = new GregorianCalendar(1992,
             Calendar.SEPTEMBER, 24);
     ConvertorUser convertorUser = new ConvertorUser();
-
-    @BeforeTest
-    public void convertCheck() throws IOException{
-        User user = new User("MRS", "Johan", "Smith", calendar.getTime(),
-                "+491234567895", null, null, "Johnny_1992"  );
-        System.out.println(convertorUser.objectToJSON(user));
-    }
 
     @Test(description = "Create user request with all fields" )
     public void sendFullRequest() throws IOException {

@@ -13,41 +13,6 @@ public class CardDetailsServiceTests {
         String password;
         String pan;
 
-    @Test(description = "Get details of card with ACTIVE status.")
-    public void getActiveCardDetail(){
-        loginName = "johnsmith1980";
-        password = "Johnny_1992";
-        pan = "1111222233334444";
-        RestAssured.baseURI=EndPoints.baseUrl;
-        given().auth().basic(loginName, password).
-                relaxedHTTPSValidation().
-                when().
-                get(EndPoints.cardDetail, loginName, pan).
-                then().
-                statusCode(200).and().contentType(ContentType.JSON).and().
-                body("user.login-name", equalTo(loginName),
-                        "user.number", equalTo(pan),
-                        "user.status", equalTo("ACTIVE")).
-                extract();
-    }
-
-    @Test(description = "Get details of card with LOCKED status.")
-    public void getLockedCardDetail(){
-        loginName = "johansmith1990";
-        password = "Johan_1990";
-        pan = "1111222233335555";
-        RestAssured.baseURI=EndPoints.baseUrl;
-        ValidatableResponse res= given().auth().basic(loginName, password).
-                relaxedHTTPSValidation().
-                when().
-                get(EndPoints.cardDetail, loginName, pan).
-                then().
-                statusCode(200).and().contentType(ContentType.JSON).and().
-                body("user.login-name", equalTo(loginName),
-                        "user.number", equalTo(pan),
-                        "user.status", equalTo("LOCKED"));
-    }
-
     @Test(description = "404 Card not found.")
     public void getCardIsNotFound(){
         String loginName = "johnsmith1980";
